@@ -74,7 +74,7 @@ endef
 # arg1 : printed file or dir removed
 # display "> <arg1>"
 define rmsg
-	$(call msg,$1,$(RM_COLOR))
+	$(call msg,$1,$(OK_COLOR))
 endef
 
 

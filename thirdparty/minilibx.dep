@@ -25,7 +25,6 @@ CLEAN_RULE_$(TFILENAME):
 	@$(MAKE) -C $(THIRDPARTY)/$(LIBDIR) clean
 
 FCLEAN_RULE_$(TFILENAME):
-	@$(MAKE) -C $(THIRDPARTY)/$(LIBDIR) fclean
 
 endef
 

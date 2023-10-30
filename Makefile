@@ -70,7 +70,8 @@ re: fclean all
 # ---
 
 Makefile.cfg:
-	$(error Makefile.cfg missing did you "./configure")
+	$(call emsg,Makefile.cfg missing did you "./configure")
+	@exit 1
 
 # ---
 # Folders targets
@@ -86,7 +87,7 @@ $(OUTDIR)/$(BIN): $(LIBS_MAKE_RULE) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%
 	$(call qcmd,$(MKDIR) -p $(@D))
-	$(call bcmd,cc,$<,$(CC) $(CFLAGS) -o $@ $<)
+	$(call bcmd,cc,$<,$(CC) -c $(CFLAGS) -o $@ $<)
 
 # Include generated dep by cc
 
