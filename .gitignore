@@ -2,8 +2,11 @@
 bin
 
 # Object files
-build
+build/
 
 # Makefile generated configuration
 Makefile.cfg
 
+# Documentation
+doc/*
+!doc/Doxyfile
