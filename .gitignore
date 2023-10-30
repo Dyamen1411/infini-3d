@@ -1,6 +1,9 @@
-# Executable
-infini-3d
+# Binaries
+bin
 
 # Object files
-obj
-*.o
+build
+
+# Makefile generated configuration
+Makefile.cfg
+
