@@ -15,19 +15,15 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+# Default target
+all: all-infini-3d
+
+# Include vars and msg module
+include Makefile.vars Makefile.msg
+
 # ---
 # General targets
 # ---
-
-# Build everything
-
-all: _all
-
-# Include vars and msg module
-
-include Makefile.vars Makefile.msg
-
-_all: $(OUTDIR)/$(BIN)
 
 # Mostly clean (clean everything but the end result)
 
@@ -65,7 +61,7 @@ re: fclean all
 
 # Make the doxygen documentation
 
-doc: doc/Doxyfile
+all-doc: doc/Doxyfile
 	$(call bcmd,doxygen,$<,doxygen $<)
 
 # Clean the doxygen documentation
@@ -74,7 +70,7 @@ cleandoc:
 	$(call rmsg,Removing the documentation (doc/html doc/man))
 	$(call qcmd,$(RM) -rf doc/html doc/man)
 
-.PHONY: _all all clean mclean fclean cleanlibs fcleanlibs mrproper re doc cleandoc
+.PHONY: all clean mclean fclean cleanlibs fcleanlibs mrproper re all-doc cleandoc
 
 # ---
 # Check configuration
@@ -85,12 +81,14 @@ Makefile.cfg:
 	@exit 1
 
 # ---
-# Folders targets
+# Build targets
 # ---
+
+all-infini-3d: $(BIN_PATH)
 
 # Make the binary
 
-$(OUTDIR)/$(BIN): $(LIBS_MAKE_RULE) $(OBJS)
+$(BIN_PATH): $(LIBS_MAKE_RULE) $(OBJS)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ld,$(OBJS),$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LD_LIBS))
 
@@ -103,3 +101,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%
 # Include generated dep by cc
 
 -include $(DEP)
+
+.PHONY: all-infini-3d
