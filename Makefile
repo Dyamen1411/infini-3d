@@ -51,7 +51,7 @@ fcleanlibs: cleanlibs $(LIBS_FCLEAN_RULE)
 
 # To original state
 
-mrproper: fclean fcleanlibs
+mrproper: fclean fcleanlibs cleandoc
 	$(call rmsg,Removing the configuration file (Makefile.cfg))
 	$(call qcmd,$(RM) -rf Makefile.cfg)
 
