@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #
-# Author : Alan "Lailouezzz" Le Bouder <alan.le-bouder@univ-rouen.fr>
+# Author : Alan "ale-boud" Le Bouder <ale-boud@student.42lehavre.fr>
 #
 # Description of source tree :
 # └── include
