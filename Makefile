@@ -70,7 +70,8 @@ cleandoc:
 	$(call rmsg,Removing the documentation (doc/html doc/man))
 	$(call qcmd,$(RM) -rf doc/html doc/man)
 
-.PHONY: all clean mclean fclean cleanlibs fcleanlibs mrproper re all-doc cleandoc
+.PHONY: all clean mclean fclean cleanlibs fcleanlibs mrproper re all-doc \
+	cleandoc
 
 # ---
 # Check configuration
