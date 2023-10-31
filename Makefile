@@ -63,7 +63,18 @@ mrproper: fclean fcleanlibs
 
 re: fclean all
 
-.PHONY: _all all clean mclean fclean cleanlibs fcleanlibs mrproper re
+# Make the doxygen documentation
+
+doc: doc/Doxyfile
+	$(call bcmd,doxygen,$<,doxygen $<)
+
+# Clean the doxygen documentation
+
+cleandoc:
+	$(call rmsg,Removing the documentation (doc/html doc/man))
+	$(call qcmd,$(RM) -rf doc/html doc/man)
+
+.PHONY: _all all clean mclean fclean cleanlibs fcleanlibs mrproper re doc cleandoc
 
 # ---
 # Check configuration
