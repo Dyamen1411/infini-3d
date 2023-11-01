@@ -27,6 +27,10 @@ CLEAN_RULE_$(TFILENAME):
 FCLEAN_RULE_$(TFILENAME):
 	@$(MAKE) -C $(THIRDPARTY)/$(LIBDIR) fclean
 
+$(THIRDPARTY)/$(LIBDIR)/Makefile:
+	@echo Did you init submodules ?
+	@exit 1
+
 endef
 
 $(eval $(call bite-$(TFILENAME)))
