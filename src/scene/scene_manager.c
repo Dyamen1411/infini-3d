@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 02:48:03 by amassias          #+#    #+#             */
-/*   Updated: 2023/11/01 14:42:09 by amassias         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:52:04 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ static void	_merge_scene_stacks(
 				t_scene_manager *manager
 				)
 {
-	t_list	*tmp;
 	t_scene	*scene;
 
 	if (manager->push_stack == NULL)
