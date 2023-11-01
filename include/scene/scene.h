@@ -6,12 +6,32 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 05:59:48 by amassias          #+#    #+#             */
-/*   Updated: 2023/10/30 07:27:08 by amassias         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:34:29 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file scene.h
+ * @author amassias (amassias@student.42lehavre.fr)
+ * @brief
+ * @date 2023-11-01
+ * @copyright Copyright (c) 2023
+ */
+
+// ************************************************************************** //
+// *                                                                        * //
+// * Header guard                                                           * //
+// *                                                                        * //
+// ************************************************************************** //
+
 #ifndef SCENE_H
 # define SCENE_H
+
+// ************************************************************************** //
+// *                                                                        * //
+// * Includes                                                               * //
+// *                                                                        * //
+// ************************************************************************** //
 
 # include "libft.h"
 
@@ -25,7 +45,7 @@
  * @struct s_scene
  * @brief Describes a scene. It should be used with a #s_scene_manager.
  * @see s_scene_manager
- * @author amassias
+ * @author amassias (amassias@student.42lehavre.fr)
  */
 struct s_scene {
 	/**
@@ -68,7 +88,7 @@ struct s_scene {
  * @brief Manages which #s_scene should be active at any given point,
  * the #s_scene hierarchy, the #s_scene switching and all the cleanup.
  * @see s_scene
- * @author amassias
+ * @author amassias (amassias@student.42lehavre.fr)
  */
 struct s_scene_manager {
 	/**
@@ -117,14 +137,15 @@ typedef struct s_scene_manager	t_scene_manager;
  * @brief Starts a scene manager with initial_scene as it's first #s_scene.
  * @param initial_scene The initial scene.
  * @param global_context A pointer to a global context.
+ * @return @c 0 on success, a non null value if an error occured.
  * @note Complete the doc with all the workings of the manager (scene handling,
  * switching, etc...).
- * @author amassias
+ * @author amassias (amassias@student.42lehavre.fr)
  */
-void	scene_manager_start(
-			t_scene *initial_scene,
-			void *global_context
-			);
+int	scene_manager_start(
+		t_scene *initial_scene,
+		void *global_context
+		);
 
 /**
  * @brief Tells the #s_scene_manager that a new #s_scene is active.
@@ -133,11 +154,11 @@ void	scene_manager_start(
  * @return @c 0 on success, a non null value if an error occured.
  * @note Maybe dont let the user know if a scene failed to create and let the
  * manager handle it and crash accordingly ?
- * @author amassias
+ * @author amassias (amassias@student.42lehavre.fr)
  */
-int		scene_manager_push_scene(
-			t_scene_manager *manager,
-			t_scene *scene
-			);
+int	scene_manager_push_scene(
+		t_scene_manager *manager,
+		t_scene *scene
+		);
 
 #endif
