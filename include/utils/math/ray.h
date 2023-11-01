@@ -6,7 +6,7 @@
 /*   By: ale-boud <ale-boud@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 02:18:15 by ale-boud          #+#    #+#             */
-/*   Updated: 2023/10/31 19:09:26 by ale-boud         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:36:55 by ale-boud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ typedef struct s_field2d {
 
 /**
  * @brief Throw a ray into the #s_field2d, with a maximum iteration of maxitr.
- * @param ray #s_ovector2d The ray to throw.
+ * @param ray #s_ovector2f The ray to throw.
  * @param field #s_field2d The field we are working on.
  * @param maxitr Please do not set this to infinity :).
  * @return #s_rayhit The ray hit information.
  */
 t_rayhit	ray_throw(
-	const t_ovector2d *ray,
-	const t_field2d *field,
-	unsigned long maxitr
-	);
+				const t_ovector2f *ray,
+				const t_field2d *field,
+				unsigned long maxitr
+				);
 
 #endif
