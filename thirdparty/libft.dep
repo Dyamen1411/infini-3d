@@ -31,6 +31,8 @@ $(THIRDPARTY)/$(LIBDIR)/Makefile:
 	@echo Did you init submodules ?
 	@exit 1
 
+.PHONY: MAKE_RULE_$(TFILENAME) CLEAN_RULE_$(TFILENAME) FCLEAN_RULE_$(TFILENAME)
+
 endef
 
 $(eval $(call bite-$(TFILENAME)))

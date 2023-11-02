@@ -85,11 +85,11 @@ Makefile.cfg:
 # Build targets
 # ---
 
-all-infini-3d: $(BIN_PATH)
+all-infini-3d: $(LIBS_MAKE_RULE) $(BIN_PATH)
 
 # Make the binary
 
-$(BIN_PATH): $(LIBS_MAKE_RULE) $(OBJS)
+$(BIN_PATH): $(OBJS)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ld,$(OBJS),$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LD_LIBS))
 
