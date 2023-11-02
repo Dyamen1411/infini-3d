@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   raythrow.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-boud <ale-boud@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 19:32:56 by ale-boud          #+#    #+#             */
-/*   Updated: 2023/11/02 11:03:02 by ale-boud         ###   ########.fr       */
+/*   Created: 2023/11/01 04:19:37 by ale-boud          #+#    #+#             */
+/*   Updated: 2023/11/02 10:43:46 by ale-boud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef RAYTHROW_H
+# define RAYTHROW_H
+
+# include "utils/math/vector.h"
 
 /**
- * @brief Coordination type.
- * @todo Fix the f**...abulus norminette :)
+ * @struct s_raythrow
+ * @brief Structure that contain all the necessary information to throw a ray.
  */
-typedef float	t_coord;
-
-# include "vector/vector2f.h"
-# include "vector/ovector2f.h"
-# include "vector/vector2i.h"
+typedef struct s_raythrow {
+	t_vector2i	mappos;
+	t_vector2i	step;
+	t_vector2f	side;
+	t_vector2f	delta;
+}	t_raythrow;
 
 #endif

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   field.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-boud <ale-boud@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 19:32:56 by ale-boud          #+#    #+#             */
-/*   Updated: 2023/11/02 11:03:02 by ale-boud         ###   ########.fr       */
+/*   Created: 2023/11/01 18:22:25 by ale-boud          #+#    #+#             */
+/*   Updated: 2023/11/01 19:05:00 by ale-boud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#include "utils/math/ray.h"
 
-/**
- * @brief Coordination type.
- * @todo Fix the f**...abulus norminette :)
- */
-typedef float	t_coord;
-
-# include "vector/vector2f.h"
-# include "vector/ovector2f.h"
-# include "vector/vector2i.h"
-
-#endif
+void	*field_at(
+			const t_field2d *field,
+			unsigned int x,
+			unsigned int y
+			)
+{
+	return ((char *)field->field + (x % field->width + y * field->width));
+}
