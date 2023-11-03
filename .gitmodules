@@ -1,6 +1,3 @@
-[submodule "thirdparty/libft"]
-	path = thirdparty/libft
-	url = git@github.com:Dyamen1411/42-LibFT.git
 [submodule "thirdparty/minilibx"]
 	path = thirdparty/minilibx
 	url = git@github.com:42Paris/minilibx-linux.git

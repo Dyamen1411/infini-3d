@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 02:48:03 by amassias          #+#    #+#             */
-/*   Updated: 2023/11/01 15:52:04 by amassias         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:08:16 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 // ************************************************************************** //
 
 #include "scene/scene.h"
-#include "libft.h"
+
+#include <stdlib.h>
 
 // ************************************************************************** //
 // *                                                                        * //
@@ -36,19 +37,40 @@
 // ************************************************************************** //
 
 /**
- * @brief Puts the scene manager push stack ahead of the original scene stack
- * then clears the push stack.
- * @param manager The #s_scene_manager.
+ * @brief Initializes @c manager with @c initial_scene as it's root scene.
+ * @param manager A pointer to a scene manager.
+ * @param initial_scene A scene.
+ * @param global_context The context that will be passed to all the scenes.
+ * @return @c 0 on success, a non null value otherwise.
+ * @see s_scene_manager
+ * @see s_scene
  * @author amassias (amassias@student.42lehavre.fr)
+ * @date 2023-11-03
+ */
+static int	_init(
+				t_scene_manager *manager,
+				t_scene *initial_scene,
+				void *global_context
+				);
+
+/**
+ * @brief Puts the @c manager push stack ahead of the original scene stack
+ * then clears the push stack.
+ * @param manager A scene manager.
+ * @see s_scene_manager
+ * @author amassias (amassias@student.42lehavre.fr)
+ * @date 2023-11-01
  */
 static void	_merge_scene_stacks(
 				t_scene_manager *manager
 				);
 
 /**
- * @brief Pops the top of the scene stack.
- * @param manager The #s_scene_manager.
+ * @brief Pops the top of the @c manager 's scene stack.
+ * @param manager A scene manager.
+ * @see s_scene_manager
  * @author amassias (amassias@student.42lehavre.fr)
+ * @date 2023-11-01
  */
 static void	_pop_scene_stack(
 				t_scene_manager *manager
@@ -68,15 +90,10 @@ int	scene_manager_start(
 	t_scene_manager	manager;
 	t_scene			*scene;
 
-	manager.global_ctx = global_context;
-	manager.stack = NULL;
-	manager.push_stack = NULL;
-	if (scene_manager_push_scene(&manager, initial_scene) != 0)
-		return (1);
-	_merge_scene_stacks(&manager);
+	_init(&manager, initial_scene, global_context);
 	while (manager.stack != NULL)
 	{
-		scene = (t_scene *)manager.stack->content;
+		scene = (t_scene *)stack_peek(manager.stack);
 		if (scene->update(scene->ctx, global_context))
 		{
 			_pop_scene_stack(&manager);
@@ -92,13 +109,7 @@ int	scene_manager_push_scene(
 		t_scene *scene
 		)
 {
-	t_list	*node;
-
-	node = ft_lstnew(scene);
-	if (node == NULL)
-		return (1);
-	ft_lstadd_front(&manager->push_stack, node);
-	return (0);
+	return (stack_push(manager->push_stack, scene) != scene);
 }
 
 // ************************************************************************** //
@@ -107,33 +118,52 @@ int	scene_manager_push_scene(
 // *                                                                        * //
 // ************************************************************************** //
 
+static int	_init(
+				t_scene_manager *manager,
+				t_scene *initial_scene,
+				void *global_context
+				)
+{
+	manager->stack = stack_create();
+	manager->push_stack = stack_create();
+	if (manager->stack == NULL || manager->push_stack == NULL)
+	{
+		stack_destroy(&manager->stack, NULL);
+		stack_destroy(&manager->push_stack, NULL);
+		return (1);
+	}
+	if (stack_push(manager->stack, initial_scene) != initial_scene)
+	{
+		stack_destroy(&manager->stack, NULL);
+		stack_destroy(&manager->push_stack, NULL);
+		return (1);
+	}
+	manager->global_ctx = global_context;
+	initial_scene->ctx = initial_scene->init(global_context);
+	return (0);
+}
+
 static void	_merge_scene_stacks(
 				t_scene_manager *manager
 				)
 {
-	t_scene	*scene;
+	t_stack	*tmp;
 
-	if (manager->push_stack == NULL)
-		return ;
-	scene = (t_scene *)manager->push_stack->content;
-	scene->ctx = scene->init(manager->global_ctx);
-	ft_lstadd_back(&manager->push_stack, manager->stack);
+	stack_merge(manager->push_stack, manager->stack);
+	tmp = manager->stack;
 	manager->stack = manager->push_stack;
-	manager->push_stack = NULL;
+	manager->push_stack = tmp;
 }
 
 static void	_pop_scene_stack(
 				t_scene_manager *manager
 				)
 {
-	t_list	*new_head;
 	t_scene	*scene;
 
-	if (manager->stack == NULL)
+	if (manager->stack->top == NULL)
 		return ;
-	scene = (t_scene *)manager->stack->content;
-	new_head = manager->stack->next;
+	scene = (t_scene *)manager->stack->top->data;
 	scene->destroy(scene->ctx, manager->global_ctx);
-	free(manager->stack);
-	manager->stack = new_head;
+	stack_pop(manager->stack);
 }

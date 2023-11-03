@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 05:59:48 by amassias          #+#    #+#             */
-/*   Updated: 2023/11/01 13:34:29 by amassias         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:08:49 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
  * @brief
  * @date 2023-11-01
  * @copyright Copyright (c) 2023
+ * @deprecated DO NOT USE ! Scenes are not initialized, a revision of the scene
+ * manager must be made
+ * @todo Make a revision of the architecture of the scene manager system.<br>
+ * The place where to put the scene initialization is non trivial which means
+ * that the architecture is very bad !
  */
 
 // ************************************************************************** //
@@ -33,7 +38,7 @@
 // *                                                                        * //
 // ************************************************************************** //
 
-# include "libft.h"
+# include "utils/data/stack.h"
 
 // ************************************************************************** //
 // *                                                                        * //
@@ -100,13 +105,13 @@ struct s_scene_manager {
 	 * @brief The scene stack. The scene on the top of this stack is the
 	 * currently active scene.
 	 */
-	t_list	*stack;
+	t_stack	*stack;
 
 	/**
 	 * @brief A temporary stack that holds all the scenes that have been pushed
 	 * during a scene update.
 	 */
-	t_list	*push_stack;
+	t_stack	*push_stack;
 };
 
 // ************************************************************************** //
