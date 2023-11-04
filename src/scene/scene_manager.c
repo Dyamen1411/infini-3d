@@ -6,7 +6,7 @@
 /*   By: amassias <amassias@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 02:48:03 by amassias          #+#    #+#             */
-/*   Updated: 2023/11/03 14:08:16 by amassias         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:26:42 by amassias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	scene_manager_start(
 	_init(&manager, initial_scene, global_context);
 	while (manager.stack != NULL)
 	{
+		_merge_scene_stacks(&manager);
 		scene = (t_scene *)stack_peek(manager.stack);
 		if (scene->update(scene->ctx, global_context))
 		{
